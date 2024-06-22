@@ -25,3 +25,14 @@ def search_contact(search_key):
             print (f"имя: {contact_info['first_name']}")
             print (f"отчество: {contact_info['middle_name']}")
             print (f"номер телефона: {contact_info['phone_number']}")
+# функция для сохранения данных в текстовом файле с возможностью импорта 
+def export_phone_book (filename):
+    with open(filename, 'w') as file:
+        for contact_id, contact_info in phone_book.items ():
+            file.write (f"{contact_id}, {contact_info['last_name']}, {contact_info['first_name']}, {contact_info['middle_name']}, {contact_info['phone_number']}n")
+def import_phone_book (filename):
+    with open (filename, 'r') as file:
+        lines = file.readlines()
+        for line in lines:
+            contact_id, last_name, first_name, middle_name, phone_number = line.strip().split(',')
+            phone_book [int (contact_id)] ={'last_name': last_name, 'first_name': first_name, 'middle_name': middle_name, 'phone_number': phone_number}
